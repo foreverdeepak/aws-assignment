@@ -90,11 +90,11 @@ module "linux_web" {
   type               = "t2.micro"
   zone_id            = "${module.vpc.zone_id}"
   user_data          = "${data.template_file.linux_bootstrap.rendered}"
-  root_volume_size   = "1"
+  root_volume_size   = "8"
 }
 
 data "template_file" "windows_bootstrap" {
-  template = "${file("${path.module}/linux_bootstrap.tpl")}"
+  template = "${file("${path.module}/windows_bootstrap.tpl")}"
 }
 
 module "windows_web" {
@@ -108,7 +108,7 @@ module "windows_web" {
   type               = "t2.micro"
   zone_id            = "${module.vpc.zone_id}"
   user_data          = "${data.template_file.windows_bootstrap.rendered}"
-  root_volume_size   = "1"
+  root_volume_size   = "8"
 }
 
 resource "aws_elb" "web_elb" {

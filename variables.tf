@@ -1,5 +1,5 @@
 variable "aws_region" {
-  default = "ap-south-1"
+  default = "ap-southeast-1"
 }
 
 variable "pub_key_path" {
