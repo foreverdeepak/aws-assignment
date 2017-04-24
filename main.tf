@@ -97,6 +97,13 @@ data "template_file" "windows_bootstrap" {
   template = "${file("${path.module}/windows_bootstrap.tpl")}"
 }
 
+module "linux_web_data_volume" {
+  source            = "github.com/opstree-terraform/ebs_volume"
+  device_name       = "/dev/sdb"
+  aws_instance_id   = "${module.linux_web.id}"
+  availability_zone = "${var.aws_region}a"
+}
+
 module "windows_web" {
   source             = "github.com/opstree-terraform/ec2"
   subnet_id          = "${module.pub_subnet_azb.id}"
@@ -107,8 +114,15 @@ module "windows_web" {
   security_group_ids = ["${module.vpc.default_sg_id}", "${module.pub_ssh_sg.id}", "${module.pub_http_sg.id}"]
   type               = "t2.micro"
   zone_id            = "${module.vpc.zone_id}"
-  user_data          = "${data.template_file.windows_bootstrap.rendered}"
+  user_data          = ""
   root_volume_size   = "8"
+}
+
+module "windows_web_data_volume" {
+  source            = "github.com/opstree-terraform/ebs_volume"
+  device_name       = "/dev/sdb"
+  aws_instance_id   = "${module.windows_web.id}"
+  availability_zone = "${var.aws_region}b"
 }
 
 resource "aws_elb" "web_elb" {
