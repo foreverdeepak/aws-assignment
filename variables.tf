@@ -7,7 +7,7 @@ variable "pub_key_path" {
 }
 
 variable "vpc_name" {
-  default = "sandy-test"
+  default = "deepakc-test"
 }
 
 variable "vpc_cidr" {
