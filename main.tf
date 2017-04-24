@@ -109,13 +109,13 @@ module "windows_web" {
   subnet_id          = "${module.pub_subnet_azb.id}"
   name               = "windows-web.${var.route53_zone_name}"
   key_pair_id        = "${module.key_pair.id}"
-  aws_region_os      = "${var.aws_region}-centos"
+  aws_region_os      = "${var.aws_region}-windows"
   aws_region         = "${var.aws_region}"
   security_group_ids = ["${module.vpc.default_sg_id}", "${module.pub_ssh_sg.id}", "${module.pub_http_sg.id}"]
   type               = "t2.micro"
   zone_id            = "${module.vpc.zone_id}"
   user_data          = ""
-  root_volume_size   = "8"
+  root_volume_size   = "30"
 }
 
 module "windows_web_data_volume" {
