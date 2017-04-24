@@ -20,5 +20,12 @@ function setup_apache() {
   echo "Hello AWS World – running on Linux – on port 80" > /usr/share/httpd/noindex/index.html
 }
 
+function mount_volume() {
+  mkfs -t ext4 /dev/xvdb
+  mount /dev/xvdb /mnt
+  echo "/dev/xvdb /mnt ext4 nofail,defaults,noatime    0 0" >> /etc/fstab
+}
+
 check_internet
+mount_volume
 setup_apache

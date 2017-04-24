@@ -102,6 +102,7 @@ module "linux_web_data_volume" {
   device_name       = "/dev/sdb"
   aws_instance_id   = "${module.linux_web.id}"
   availability_zone = "${var.aws_region}a"
+  volume_size       = "1"
 }
 
 module "windows_web" {
@@ -123,6 +124,7 @@ module "windows_web_data_volume" {
   device_name       = "/dev/sdb"
   aws_instance_id   = "${module.windows_web.id}"
   availability_zone = "${var.aws_region}b"
+  volume_size       = "1"
 }
 
 resource "aws_elb" "web_elb" {
