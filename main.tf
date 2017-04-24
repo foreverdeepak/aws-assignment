@@ -97,6 +97,7 @@ data "template_file" "windows_bootstrap" {
   template = "${file("${path.module}/windows_bootstrap.tpl")}"
 }
 
+/*
 module "linux_web_data_volume" {
   source            = "github.com/opstree-terraform/ebs_volume"
   device_name       = "/dev/sdb"
@@ -104,6 +105,7 @@ module "linux_web_data_volume" {
   availability_zone = "${var.aws_region}a"
   volume_size       = "1"
 }
+*/
 
 module "windows_web" {
   source             = "github.com/opstree-terraform/ec2"
@@ -119,6 +121,7 @@ module "windows_web" {
   root_volume_size   = "30"
 }
 
+/*
 module "windows_web_data_volume" {
   source            = "github.com/opstree-terraform/ebs_volume"
   device_name       = "/dev/sdb"
@@ -126,6 +129,7 @@ module "windows_web_data_volume" {
   availability_zone = "${var.aws_region}b"
   volume_size       = "1"
 }
+*/
 
 resource "aws_elb" "web_elb" {
   name            = "web-elb"
